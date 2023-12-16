@@ -2,7 +2,10 @@
 const express = require("express");
 const app = express();
 
-// Endpoint to hello.js
+// Serve static files from the 'public' directory
+app.use(express.static("public"));
+
+// First endpoint to hello.js
 app.get("/hello", function (req, res) 
 {
   res.type("text");
@@ -12,11 +15,15 @@ app.get("/hello", function (req, res)
 //Define endpoint for excercise 1 here: Splendid Circles
 app.get("/math/circle/:r", function (req, res) 
 {
-  const r = req.params.r;
-  const area = Math.PI * r * r;
-  const circumference = Math.PI * 2 * r;
-  res.type("text");
-  res.send(`Area: ${area}, Circumference: ${circumference}`);
+  const radius = parseFloat(req.params.r);
+
+ if (isNaN(radius) || radius <= 0) {
+        res.status(400).json({ error: 'Invalid radius provided' });
+    } else {
+        const area = Math.PI * radius * radius;
+        const circumference = Math.PI * 2 * radius;
+        res.json({ area: area, circumference: circumference });
+    }
 });
 
 // Define endpoint for excercise 2 here: Hello, you!
@@ -37,5 +44,8 @@ app.get("/hello/name", function (req, res)
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
 module.exports = app;
