@@ -16,7 +16,7 @@ app.get('/hello', function (req, res)
 });
   
 
-// endpoint to calculate circle area and circumference
+// endpoint # 1 to calculate circle area and circumference
 app.get('/math/circle/:r', function(req, res) 
 {
   // get radius from URL parameter
@@ -27,7 +27,8 @@ app.get('/math/circle/:r', function(req, res)
   {
     // If the radius is not valid, send a 400 Bad Request response
     res.status(400).json({ error: 'Invalid radius provided' });
-} else 
+  } 
+  else 
   {
     // Calculate the area and circumference
     const area = Math.PI * radius * radius;
@@ -35,7 +36,8 @@ app.get('/math/circle/:r', function(req, res)
 
     // Send a JSON response with the calculated values
     res.json({ area: area, circumference: circumference });
-
+    res.type("text");
+    res.send(`Area: ${area}, Circumference: ${circumference}`);
   }
 });
 
