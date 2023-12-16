@@ -1,39 +1,41 @@
-'use strict';
-
-const express = require('express');
+"use strict";
+const express = require("express");
 const app = express();
 
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
-
-// First Endpoint to hello.js
-app.get('/hello', function (req, res) {
-    res.type('text');
-    res.send('Hello World!');
+// Endpoint to hello.js
+app.get("/hello", function (req, res) 
+{
+  res.type("text");
+  res.send("Hello World!");
 });
 
-// Endpoint to calculate circle area and circumference
-app.get('/math/circle/:r', function (req, res) {
-    // get radius from URL parameter
-    const radius = parseFloat(req.params.r);
+//Define endpoint for excercise 1 here: Splendid Circles
+app.get("/math/circle/:r", function (req, res) 
+{
+  const r = req.params.r;
+  const area = Math.PI * r * r;
+  const circumference = Math.PI * 2 * r;
+  res.type("text");
+  res.send(`Area: ${area}, Circumference: ${circumference}`);
+});
 
-    // Check if the radius is a valid number
-    if (isNaN(radius) || radius <= 0) {
-        // If the radius is not valid, send a 400 Bad Request response
-        res.status(400).json({ error: 'Invalid radius provided' });
-    } else {
-        // Calculate the area and circumference
-        const area = Math.PI * radius * radius;
-        const circumference = Math.PI * 2 * radius;
+// Define endpoint for excercise 2 here: Hello, you!
+app.get("/hello/name", function (req, res) 
+{
+  const firstName = req.query["firstName"];
+  const lastName = req.query["lastName"];
 
-        // Send a JSON response with the calculated values
-        res.json({ area: area, circumference: circumference });
-    }
+  if (firstName && lastName) 
+  {
+    res.type("text");
+    res.send(`Hello ${req.query["firstName"]} ${req.query["lastName"]}`);
+  }
+  else
+  {
+    res.status(400).send("Missing Required GET parameters: first, last");
+  }
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-
+app.listen(PORT);
 module.exports = app;
