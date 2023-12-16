@@ -4,7 +4,6 @@ const app = express();
 
 
 // define all endpoints here
-
 app.use(express.static('public'));
 
 
@@ -36,12 +35,17 @@ app.get('/math/circle/:r', function(req, res)
 
     // Send a JSON response with the calculated values
     res.json({ area: area, circumference: circumference });
-    res.type("text");
-    res.send(`Area: ${area}, Circumference: ${circumference}`);
+    // res.type("text");
+    // res.send(`Area: ${area}, Circumference: ${circumference}`);
   }
 });
 
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 const PORT = process.env.PORT || 8000;
-app.listen(PORT);
+app.listen(PORT, () => 
+{
+  console.log('server is running on http://localhost:${PORT}');
+});
+
+module.exports = app;
