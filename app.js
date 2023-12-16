@@ -21,7 +21,7 @@ app.get('/math/circle/:r', function(req, res)
   // get radius from URL parameter
   const radius = parseFloat(req.params.r);
 
-  // Check if the radius is a valid number
+  // Check if the radius is valid 
   if (isNaN(radius) || radius <= 0) 
   {
     // If the radius is not valid, send a 400 Bad Request response
