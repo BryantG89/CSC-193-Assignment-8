@@ -15,11 +15,16 @@ app.get('/hello', function (req, res)
 });
   
 
-// endpoint # 1 to calculate circle area and circumference
+// endpoint excercise #1: to calculate circle area and circumference
 app.get('/math/circle/:r', function(req, res) 
 {
   // get radius from URL parameter
-  const radius = parseFloat(req.params.r);
+  const radius = req.params.r;
+  
+  // Calculate the area and circumference
+  const area = Math.PI * radius * radius;
+  const circumference = Math.PI * 2 * radius;
+
 
   // Check if the radius is valid 
   if (isNaN(radius) || radius <= 0) 
@@ -29,10 +34,6 @@ app.get('/math/circle/:r', function(req, res)
   } 
   else 
   {
-    // Calculate the area and circumference
-    const area = Math.PI * radius * radius;
-    const circumference = Math.PI * 2 * radius;
-
     // Send a JSON response with the calculated values
     res.json({ area: area, circumference: circumference });
     // res.type("text");
@@ -43,9 +44,5 @@ app.get('/math/circle/:r', function(req, res)
 
 // app.use(express.static('public'));
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => 
-{
-  console.log('server is running on http://localhost:${PORT}');
-});
-
+app.listen(PORT);
 module.exports = app;
