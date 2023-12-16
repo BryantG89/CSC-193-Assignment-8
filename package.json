@@ -1,0 +1,16 @@
+{
+  "name": "csc-193-assignment-8",
+  "version": "1.0.0",
+  "description": "Setting up the project and running the server\r Assuming your project has the correct directory structure, run the command npm init at the root\r You will need to install any non-core modules using npm. Run the command npm install <package-name> to do so.\r Open a terminal in the directory with the server and enter nodemon. nodemon is a tool that restarts the server if you make changes to the JS code in order to reflect the changes.\r To stop the server, enter ctrl+c in the terminal.\r Access your page in the browser. Since the server is being hosted locally on your machine, use the URL localhost:8000/hello. 8000 is the port we specified in hello.js.\r Since we told the server to serve files in the \"public\" directory, we can access our website with the url localhost:8000/hello.html.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.2"
+  }
+}
